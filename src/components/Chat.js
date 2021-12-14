@@ -33,9 +33,10 @@ function Chat() {
         </ChatHeaderRight>
       </ChatHeader>
       <ChatBody>
-        <span>cody klepper</span>
-        <ChatMessage>
-          <p> hi aly</p>
+        <ChatMessage className={`${true && "chat-reciever"}`}>
+          <ChatName>cody klepper:</ChatName>
+          <Message> hi aly</Message>
+          <TimeStamp>3:15pm</TimeStamp>
         </ChatMessage>
       </ChatBody>
       <ChatFooter></ChatFooter>
@@ -77,23 +78,38 @@ const ChatBody = styled.div`
   background-position: center;
   padding: 30px;
   overflow: scroll;
-  span {
-    font-size: xx-small;
-    font-weight: bold;
-  }
   /* background-image: url() */
 `;
 
 const ChatMessage = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: column;
   font-size: 16px;
   padding: 7px;
   background-color: #fff;
   border-radius: 10px;
   width: fit-content;
   margin-bottom: 30px;
+
+  &.chat-reciever {
+    margin-left: auto;
+    background-color: #dcf8c6;
+  }
 `;
+
+const ChatName = styled.span`
+  position: absolute;
+  top: -15px;
+  font-size: xx-small;
+  font-weight: bold;
+`;
+
+const Message = styled.p``;
 const ChatFooter = styled.div``;
 
+const TimeStamp = styled.p`
+  margin-left: 10px;
+  margin-top: 4px;
+  font-size: xx-small;
+`;
 export default Chat;
