@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
+import { auth, provider } from "../firebase";
 function Login() {
-  const signIn = () => {};
+  const signIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => console.log(result))
+      .catch((err) => alert(err.message));
+  };
+
   return (
     <Container>
       <Main>
@@ -13,7 +20,9 @@ function Login() {
         <LoginText>
           <h1>Sign into Chat App</h1>
         </LoginText>
-        <Button onClick={signIn}>Sign in with Google</Button>
+        <Button className="login-btn" onClick={signIn}>
+          Sign in with Google
+        </Button>
       </Main>
     </Container>
   );
@@ -28,14 +37,21 @@ const Container = styled.div`
 `;
 const Main = styled.div`
   padding: 100px;
-  text-align: centerl
+  text-align: center;
   background-color: white;
   border-radius: 10px;
   img {
-      width: 500px;
-      height: 400px;
-      object-fit: contain;
-      object-position: center;
+    height: 200px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  & .login-btn {
+    margin-top: 20px;
+    text-transform: inherit !important;
+    background-color: #1a1c1e !important;
+    color: white !important;
   }
 `;
 const LoginText = styled.div``;
