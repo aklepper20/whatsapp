@@ -1,20 +1,27 @@
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
+import Login from "./components/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
     <Container>
-      <AppBody>
-        <Router>
-          <Sidebar />
-          <Routes>
-            <Route path="/rooms/:roomId" element={<Chat />} />
-            <Route path="/" element={<Chat />} />
-          </Routes>
-        </Router>
-      </AppBody>
+      {!user ? (
+        <Login />
+      ) : (
+        <AppBody>
+          <Router>
+            <Sidebar />
+            <Routes>
+              <Route path="/rooms/:roomId" element={<Chat />} />
+              <Route path="/" element={<Chat />} />
+            </Routes>
+          </Router>
+        </AppBody>
+      )}
     </Container>
   );
 }
