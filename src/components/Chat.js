@@ -5,15 +5,27 @@ import MicIcon from "@mui/icons-material/Mic";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import db from "../firebase";
 
 function Chat() {
   const [seed, setSeed] = useState("");
   const [input, setInput] = useState("");
+  const [roomName, setRoomName] = useState("");
+  const { roomId } = useParams();
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
-  }, []);
+  }, [roomName]);
+
+  useEffect(() => {
+    if (roomId) {
+      db.collection("rooms")
+        .doc(roomId)
+        .onSnapshot((snapshot) => setRoomName(snapshot.data().name));
+    }
+  }, [roomId]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -25,7 +37,7 @@ function Chat() {
       <ChatHeader>
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <ChatHeaderInfo>
-          <h3>RoomName</h3>
+          <h3>{roomName}</h3>
           <p>Last Seen at ....</p>
         </ChatHeaderInfo>
         <ChatHeaderRight>

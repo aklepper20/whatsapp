@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <Container>
       <AppBody>
-        <Sidebar />
-        <Chat />
+        <Router>
+          <Sidebar />
+          <Routes>
+            <Route path="/rooms/:roomId" element={<Chat />} />
+            <Route path="/" element={<Chat />} />
+          </Routes>
+        </Router>
       </AppBody>
     </Container>
   );

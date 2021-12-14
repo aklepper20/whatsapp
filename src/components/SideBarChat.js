@@ -1,5 +1,6 @@
 import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import db from "../firebase";
 
@@ -21,13 +22,15 @@ function SideBarChat({ addNewChat, id, name }) {
   };
 
   return !addNewChat ? (
-    <SidebarChatContainer>
-      <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-      <SidebarChatInfo>
-        <h2>{name}</h2>
-        <p>Last message...</p>
-      </SidebarChatInfo>
-    </SidebarChatContainer>
+    <Link to={`/rooms/${id}`}>
+      <SidebarChatContainer>
+        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <SidebarChatInfo>
+          <h2>{name}</h2>
+          <p>Last message...</p>
+        </SidebarChatInfo>
+      </SidebarChatContainer>
+    </Link>
   ) : (
     <NewChat onClick={createChat}>
       <h2>Add New Chat</h2>
