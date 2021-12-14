@@ -9,10 +9,16 @@ import styled from "styled-components";
 
 function Chat() {
   const [seed, setSeed] = useState("");
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    setInput("");
+  };
 
   return (
     <ChatContainer>
@@ -42,15 +48,19 @@ function Chat() {
         </ChatMessage>
       </ChatBody>
       <ChatFooter>
-        <InsertEmoticonIcon />
+        <InsertEmoticonIcon style={{ color: "gray" }} />
         <MessageForm>
           <MessageInput
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             type="text"
             placeholder="Type a message..."
           ></MessageInput>
-          <MessageSubmitBtn>SEND</MessageSubmitBtn>
+          <MessageSubmitBtn type="submit" onClick={sendMessage}>
+            SEND
+          </MessageSubmitBtn>
         </MessageForm>
-        <MicIcon />
+        <MicIcon style={{ color: "gray" }} />
       </ChatFooter>
     </ChatContainer>
   );
@@ -131,8 +141,20 @@ const ChatFooter = styled.div`
   border-top: 1px solid lightgray;
 `;
 
-const MessageForm = styled.form``;
-const MessageInput = styled.input``;
-const MessageSubmitBtn = styled.button``;
+//take up all space with flex 1
+const MessageForm = styled.form`
+  flex: 1;
+  display: flex;
+`;
+//now we can stretch the input to take up all that space
+const MessageInput = styled.input`
+  flex: 1;
+  border-radius: 30px;
+  padding: 10px;
+  border: none;
+`;
+const MessageSubmitBtn = styled.button`
+  display: none;
+`;
 
 export default Chat;
