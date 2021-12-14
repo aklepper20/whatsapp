@@ -5,6 +5,7 @@ import { Avatar, IconButton } from "@mui/material";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
+import SideBarChat from "./SideBarChat";
 
 function Sidebar() {
   return (
@@ -36,7 +37,13 @@ function Sidebar() {
         </SearchContainer>
       </SidebarSearch>
 
-      <SidebarChat></SidebarChat>
+      <SidebarChat>
+        <SideBarChat />
+        <SideBarChat />
+        <SideBarChat />
+        <SideBarChat />
+        <SideBarChat />
+      </SidebarChat>
     </SidebarContainer>
   );
 }
@@ -58,7 +65,7 @@ const SidebarSearch = styled.div`
   align-items: center;
   background-color: #f6f6f6;
   height: 40px;
-  padding: 20px;
+  padding: 25px;
 `;
 const SearchContainer = styled.div`
   display: flex;
@@ -73,7 +80,12 @@ const SearchInput = styled.input`
   margin-left: 5px;
   border-radius: 20px;
 `;
-const SidebarChat = styled.div``;
+//telling chat to take up remaining space in the column flex within the component
+const SidebarChat = styled.div`
+  flex: 1;
+  overflow: scroll;
+  background-color: white;
+`;
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
