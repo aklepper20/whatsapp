@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
+import Chat from "./components/Chat";
 
 function App() {
   return (
     <Container>
       <AppBody>
         <Sidebar />
+        <Chat />
       </AppBody>
     </Container>
   );
