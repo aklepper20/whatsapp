@@ -1,5 +1,7 @@
 import { SearchOutlined } from "@mui/icons-material";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import MicIcon from "@mui/icons-material/Mic";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
@@ -39,7 +41,17 @@ function Chat() {
           <TimeStamp>3:15pm</TimeStamp>
         </ChatMessage>
       </ChatBody>
-      <ChatFooter></ChatFooter>
+      <ChatFooter>
+        <InsertEmoticonIcon />
+        <MessageForm>
+          <MessageInput
+            type="text"
+            placeholder="Type a message..."
+          ></MessageInput>
+          <MessageSubmitBtn>SEND</MessageSubmitBtn>
+        </MessageForm>
+        <MicIcon />
+      </ChatFooter>
     </ChatContainer>
   );
 }
@@ -104,12 +116,23 @@ const ChatName = styled.span`
   font-weight: bold;
 `;
 
-const Message = styled.p``;
-const ChatFooter = styled.div``;
-
 const TimeStamp = styled.p`
   margin-left: 10px;
   margin-top: 4px;
   font-size: xx-small;
 `;
+
+const Message = styled.p``;
+const ChatFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  border-top: 1px solid lightgray;
+`;
+
+const MessageForm = styled.form``;
+const MessageInput = styled.input``;
+const MessageSubmitBtn = styled.button``;
+
 export default Chat;
