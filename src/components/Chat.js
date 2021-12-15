@@ -12,6 +12,7 @@ import db from "../firebase";
 function Chat() {
   const [seed, setSeed] = useState("");
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
   const { roomId } = useParams();
 
@@ -24,6 +25,14 @@ function Chat() {
       db.collection("rooms")
         .doc(roomId)
         .onSnapshot((snapshot) => setRoomName(snapshot.data().name));
+
+      db.collection("rooms")
+        .doc(roomId)
+        .collection("messages")
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessages(snapshot.docs.map((doc) => doc.data()))
+        );
     }
   }, [roomId]);
 
@@ -53,11 +62,15 @@ function Chat() {
         </ChatHeaderRight>
       </ChatHeader>
       <ChatBody>
-        <ChatMessage className={`${true && "chat-reciever"}`}>
-          <ChatName>cody klepper:</ChatName>
-          <Message> hi aly</Message>
-          <TimeStamp>3:15pm</TimeStamp>
-        </ChatMessage>
+        {messages.map((message) => (
+          <ChatMessage className={`${true && "chat-reciever"}`}>
+            <ChatName>{message.name}:</ChatName>
+            <Message> {message.message}</Message>
+            <TimeStamp>
+              {new Date(message.timestamp?.toDate()).toUTCString()}
+            </TimeStamp>
+          </ChatMessage>
+        ))}
       </ChatBody>
       <ChatFooter>
         <InsertEmoticonIcon style={{ color: "gray" }} />
