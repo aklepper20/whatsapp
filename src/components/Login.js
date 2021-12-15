@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import { auth, provider } from "../firebase";
+
 function Login() {
   const signIn = () => {
     auth
