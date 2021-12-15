@@ -73,7 +73,11 @@ function Chat() {
       </ChatHeader>
       <ChatBody>
         {messages.map((message) => (
-          <ChatMessage className={`${true && "chat-reciever"}`}>
+          <ChatMessage
+            className={`${
+              message.name === user.displayName && "chat-reciever"
+            }`}
+          >
             <ChatName>{message.name}:</ChatName>
             <Message> {message.message}</Message>
             <TimeStamp>
