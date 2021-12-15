@@ -57,7 +57,12 @@ function Chat() {
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <ChatHeaderInfo>
           <h3>{roomName}</h3>
-          <p>Last Seen at ....</p>
+          <p>
+            Last Seen at{" "}
+            {new Date(
+              messages[messages.length - 1]?.timestamp?.toDate()
+            ).toUTCString()}
+          </p>
         </ChatHeaderInfo>
         <ChatHeaderRight>
           <IconButton>
@@ -74,11 +79,12 @@ function Chat() {
       <ChatBody>
         {messages.map((message) => (
           <ChatMessage
+            //production use message.id === user.id, multiple ppl can have the same name
             className={`${
               message.name === user.displayName && "chat-reciever"
             }`}
           >
-            <ChatName>{message.name}:</ChatName>
+            <ChatName>{message.name}</ChatName>
             <Message> {message.message}</Message>
             <TimeStamp>
               {new Date(message.timestamp?.toDate()).toUTCString()}
