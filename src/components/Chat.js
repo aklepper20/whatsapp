@@ -6,8 +6,11 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
 import styled from "styled-components";
 import db from "../firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 function Chat() {
   const [seed, setSeed] = useState("");
@@ -15,6 +18,7 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
   const { roomId } = useParams();
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
@@ -38,6 +42,12 @@ function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+
+    db.collection("rooms").doc(roomId).collection("messages").add({
+      message: input,
+      name: user.displayName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     setInput("");
   };
 
