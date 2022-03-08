@@ -44,18 +44,6 @@ function Sidebar() {
         </HeaderRight>
       </SidebarHeader>
 
-      <SidebarSearch>
-        <SearchContainer>
-          <SearchIcon
-            style={{ marginTop: "5px", color: "gray", padding: "2px" }}
-          />
-          <SearchInput
-            type="text"
-            placeholder="Search or start a new chat..."
-          ></SearchInput>
-        </SearchContainer>
-      </SidebarSearch>
-
       <SidebarChat>
         <SideBarChat addNewChat />
         {rooms.map((room) => (
@@ -78,26 +66,7 @@ const SidebarHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const SidebarSearch = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #f6f6f6;
-  height: 40px;
-  padding: 25px;
-`;
-const SearchContainer = styled.div`
-  display: flex;
-  background-color: white;
-  width: 100%;
-  height: 35px;
-  border-radius: 20px;
-`;
-const SearchInput = styled.input`
-  width: 190px;
-  border: none;
-  margin-left: 5px;
-  border-radius: 20px;
-`;
+
 //telling chat to take up remaining space in the column flex within the component
 const SidebarChat = styled.div`
   flex: 1;

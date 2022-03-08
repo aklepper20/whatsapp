@@ -57,12 +57,6 @@ function Chat() {
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <ChatHeaderInfo>
           <h3>{roomName}</h3>
-          <p>
-            Last Seen at{" "}
-            {new Date(
-              messages[messages.length - 1]?.timestamp?.toDate()
-            ).toUTCString()}
-          </p>
         </ChatHeaderInfo>
         <ChatHeaderRight>
           <IconButton>
@@ -86,9 +80,6 @@ function Chat() {
           >
             <ChatName>{message.name}</ChatName>
             <Message> {message.message}</Message>
-            <TimeStamp>
-              {new Date(message.timestamp?.toDate()).toUTCString()}
-            </TimeStamp>
           </ChatMessage>
         ))}
       </ChatBody>
@@ -145,7 +136,6 @@ const ChatBody = styled.div`
   background-position: center;
   padding: 30px;
   overflow: scroll;
-  /* background-image: url() */
 `;
 
 const ChatMessage = styled.div`
@@ -155,7 +145,7 @@ const ChatMessage = styled.div`
   padding: 7px;
   background-color: #fff;
   border-radius: 10px;
-  width: fit-content;
+  width: 100px;
   margin-bottom: 30px;
 
   &.chat-reciever {
